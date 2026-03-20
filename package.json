@@ -1,0 +1,19 @@
+{
+  "name": "claude-code-glasses",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pipe Claude Code's brain to your face.",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r --parallel dev",
+    "ccg": "pnpm --filter @ccg/cli start",
+    "simulate": "pnpm --filter @ccg/cli simulate"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

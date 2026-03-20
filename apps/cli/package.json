@@ -1,0 +1,12 @@
+{
+  "name": "@ccg/cli",
+  "version": "0.1.0",
+  "bin": {
+    "ccg": "src/index.ts"
+  },
+  "dependencies": {
+    "@ccg/core": "workspace:*",
+    "@ccg/parser": "workspace:*",
+    "@ccg/renderer-terminal": "workspace:*"
+  }
+}
