@@ -2,10 +2,10 @@
 
 > Pipe Claude Code's brain to your face. Open source.
 
-Claude Code already knows everything — what it's thinking, what tool it's running, when it needs you. This project surfaces that stream on AR display glasses so you can monitor and approve agent actions without touching your laptop.
+Claude is the first "piece of software" that has radically changed my process and expanded my perspective in four decades of using a computer. More than Final cut, Arduino or Unity did before it, Claude Code has empowered me to make all the things I image and damatically shortened the time from brain-to-prod. Sometimes on my way to work on the BART or when im stretching before Pilates, or just coming out of sedation from a colonoscopy, I cant stop thinking about our work together. I want anytime-anywhere access to be able to approve a build plan, brainstorm a design approach or just check in on the status of ongoing work. This software project is my attempt to connect stream-of-Claude to stream-of-Powderly consciousnesses on AR display glasses with the most minimal yet accessibe amount of i/o to enable me to monitor, approve actions and provide feedback to my fave agent on-the-go and at-the-ready without needing to touch my laptop.
 
-**Primary hardware target: RayNeo X2** (Android, sideload via ADB)  
-**Also planned:** Even Realities G2, XREAL One
+** Current primary hardware target: RayNeo X2** (Android, sideload via ADB)  
+**Also planned:** Even Realities G2, XREAL One, anything except Meta ray-banned. 
 
 ---
 
@@ -23,7 +23,7 @@ ccg simulate --file ./examples/basic/session.jsonl
 
 ## What You'll See
 
-Three display primitives, nothing more:
+Three minimal display primitives, nothing more:
 
 | Primitive | What it is |
 |---|---|
