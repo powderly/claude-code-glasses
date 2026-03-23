@@ -1,0 +1,2 @@
+rootProject.name = 'ccg-glasses'
+include ':app'
