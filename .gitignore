@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+out/
+*.js.map
+*.tsbuildinfo
+
+# Android build
+apps/android/build/
+apps/android/.gradle/
+apps/android/local.properties
+*.apk
+*.aab
+*.keystore
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+
+# Temp
+tmp/
+temp/
+*.tmp
+
+# Claude Code local config
+.claude/
