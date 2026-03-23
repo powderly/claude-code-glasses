@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="640dp"
+    android:layout_height="480dp"
+    android:background="@color/black"
+    android:padding="24dp">
+
+    <!-- Glyph: bottom-right corner, 48x48dp -->
+    <com.ccg.glasses.ui.GlyphView
+        android:id="@+id/glyphView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom|end" />
+
+    <!-- Whisper: bottom-left, leaves 64dp margin for glyph -->
+    <com.ccg.glasses.ui.WhisperView
+        android:id="@+id/whisperView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_marginEnd="64dp" />
+
+    <!-- Card: centered -->
+    <com.ccg.glasses.ui.CardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+</FrameLayout>
