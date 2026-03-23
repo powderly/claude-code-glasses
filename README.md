@@ -30,8 +30,29 @@ Three minimal display primitives, nothing more:
 |---|---|
 | **Glyph** | Ambient ascii symbols inspired by the elements — idle (earth) / thinking (water) / running (fire) / waiting (air) / done (earth, again) / error |
 | **Whisper** | Single line, bottom of the FOV — current task, <50 chars max, auto-fades |
-| ** Decision Card** | HITL approval surface — appears when Claude Code needs a decision |
+| ** Decision Card** | HITL approval surface — appears when Claude Code needs a decision | 
 | ** Update Card** | Status update surface — appears when Claude Code completes a phase or a build |
+
+### UI Components
+
+Glyph
+
+
+
+Decision Card
+┌─────────────────────────────────────┐
+│  Delete legacy token handler?        │
+│                                      │
+│  [✓ Approve]    [✕ Reject]           │
+└─────────────────────────────────────┘
+
+Update Card
+┌─────────────────────────────────────┐
+│  ✓ Phase 1 complete                  │
+│  Auth middleware refactored          │
+│                                      │
+│  [Got it]                            │
+└─────────────────────────────────────┘
 
 
 ## Hardware Setup (RayNeo X2)
