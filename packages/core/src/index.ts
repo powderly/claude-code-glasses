@@ -16,11 +16,15 @@ export interface WhisperEvent {
   ttl: number           // ms before fade
 }
 
+export type CardType = 'decision' | 'update'
+
 export interface CardEvent {
   kind: 'card'
+  id: string
+  cardType: CardType
   message: string       // max 2 lines
   confirmLabel: string
-  dismissLabel: string
+  dismissLabel: string | null
   timeoutMs: number
 }
 
@@ -132,7 +136,7 @@ export type CCContentBlock =
 
 // ─── Transport ────────────────────────────────────────────────────────────────
 
-export type TransportType = 'usb' | 'wifi' | 'terminal'
+export type TransportType = 'usb' | 'wifi' | 'relay' | 'terminal'
 
 export interface CCGConfig {
   target: 'rayneo' | 'terminal'
