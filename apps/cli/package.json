@@ -7,6 +7,12 @@
   "dependencies": {
     "@ccg/core": "workspace:*",
     "@ccg/parser": "workspace:*",
-    "@ccg/renderer-terminal": "workspace:*"
+    "@ccg/relay": "workspace:*",
+    "@ccg/renderer-terminal": "workspace:*",
+    "qrcode-terminal": "^0.12.0",
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.10"
   }
 }
