@@ -6,6 +6,7 @@
 {"type":"assistant","message":{"id":"msg_005","content":[{"type":"tool_use","id":"toolu_003","name":"Read","input":{"file_path":"/home/james/my-project/src/auth/token-handler.ts"}}]}}
 {"type":"assistant","message":{"id":"msg_006","content":[{"type":"tool_use","id":"toolu_004","name":"Grep","input":{"pattern":"legacyTokenHandler","path":"/home/james/my-project/src"}}]}}
 {"type":"assistant","message":{"id":"msg_007","content":[{"type":"tool_use","id":"toolu_005","name":"Edit","input":{"file_path":"/home/james/my-project/src/auth/middleware.ts","old_string":"import { legacyTokenHandler }","new_string":"import { jwtHandler }"}}]}}
+{"type":"system","subtype":"permission_request","tool":"Edit","description":"Delete legacy token handler?","session_id":"sess_abc123"}
 {"type":"assistant","message":{"id":"msg_008","content":[{"type":"tool_use","id":"toolu_006","name":"Bash","input":{"command":"npm test -- --testPathPattern=auth"}}]}}
 {"type":"assistant","message":{"id":"msg_009","content":[{"type":"thinking","thinking":"Tests passed. Now I should check if there are any other references to the legacy handler before we remove it entirely."}]}}
 {"type":"assistant","message":{"id":"msg_010","content":[{"type":"tool_use","id":"toolu_007","name":"Glob","input":{"pattern":"**/*.ts","path":"/home/james/my-project/src"}}]}}

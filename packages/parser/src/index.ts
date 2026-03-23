@@ -28,6 +28,12 @@ export class ClaudeCodeParser extends EventEmitter {
   // Track in-progress tool inputs (streamed as partial JSON)
   private pendingTools: Map<number, { name: string; partialJson: string }> = new Map()
 
+  // Card ID counter for unique card identification
+  private cardIdCounter = 0
+  private nextCardId(): string {
+    return `card_${++this.cardIdCounter}`
+  }
+
   constructor(config: Partial<CCGConfig> = {}) {
     super()
     this.config = { ...DEFAULT_CONFIG, ...config }
@@ -60,8 +66,25 @@ export class ClaudeCodeParser extends EventEmitter {
     switch (msg.type) {
 
       case 'system':
-        // Session starting
-        this.setState({ glyph: 'thinking', whisper: 'starting…', card: null })
+        if (msg.subtype === 'permission_request') {
+          const tool = (msg as Record<string, unknown>).tool as string ?? 'unknown'
+          const description = (msg as Record<string, unknown>).description as string ?? `Allow ${tool}?`
+          this.setState({
+            glyph: 'awaiting',
+            whisper: null,
+            card: {
+              kind: 'card',
+              id: this.nextCardId(),
+              cardType: 'decision',
+              message: truncateWhisper(description),
+              confirmLabel: 'Approve',
+              dismissLabel: 'Reject',
+              timeoutMs: 0,
+            },
+          })
+        } else {
+          this.setState({ glyph: 'thinking', whisper: 'starting…', card: null })
+        }
         break
 
       case 'assistant':
