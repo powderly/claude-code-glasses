@@ -18,9 +18,11 @@ export interface WhisperEvent {
 
 export interface CardEvent {
   kind: 'card'
+  id: string
+  cardType: 'decision' | 'update'
   message: string       // max 2 lines
   confirmLabel: string
-  dismissLabel: string
+  dismissLabel: string | null
   timeoutMs: number
 }
 
