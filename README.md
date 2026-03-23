@@ -37,7 +37,14 @@ Three minimal display primitives, nothing more:
 
 Glyph
 
-
+glyph  state      element  meaning                            agent     card
+─────────────────────────────────────────────────────────────────────────────
+▽      idle       earth    Waiting. Nothing running.          paused    —
+▼      thinking   water    Reasoning. No tool called yet.     running   —
+▲      running    fire     Tool executing. Side effects.      running   update
+△      awaiting   air      Needs your decision.               paused    decision
+▽      done       earth    Task/phase complete. Fades in 2s.  complete  update
+✕      error      X        Something failed. Stays.           paused    —
 
 Decision Card
 ┌─────────────────────────────────────┐
