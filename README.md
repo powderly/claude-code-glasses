@@ -1,8 +1,9 @@
-# claude-code-glasses
+# Claude Elements
+aka claude-code-glasses
 
 > Pipe Claude Code's brain to your face. Open source.
 
-Claude is the first "piece of software" that has radically changed my process and expanded my perspective in four decades of using a computer. More than Final cut, Arduino or Unity did before it, Claude Code has empowered me to make all the things I image and damatically shortened the time from brain-to-prod. Sometimes on my way to work on the BART or when im stretching before Pilates, or just coming out of sedation from a colonoscopy, I cant stop thinking about our work together. I want anytime-anywhere access to be able to approve a build plan, brainstorm a design approach or just check in on the status of ongoing work. This software project is my attempt to connect stream-of-Claude to stream-of-Powderly consciousnesses on AR display glasses with the most minimal yet accessibe amount of i/o to enable me to monitor, approve actions and provide feedback to my fave agent on-the-go and at-the-ready without needing to touch my laptop.
+Claude is the first "piece of software" that has radically changed how I work and expanded my perspective in over a decade. Like Final cut, Arduino and Unity did before it, Claude Code has really empowered me to make all the things I can image and damatically shortened the time it takes me to go from brain to prod. But, sometimes when on my way to work on the BART or stretching it out before Pilates, or just waking up from twilight sedation after a colonoscopy, I cant stop thinking about our work together. I want anytime-anywhere access to Claude to be able to approve a build plan, brainstorm a design approach or just check in on the status of ongoing work. This software project is my attempt to connect stream-of-Claude to stream-of-Powderly consciousnesses using AR display glasses with the most minimal yet accessibe amount of i/o to enable me to monitor, approve and provide feedback on the actions of my fave agent when im on-the-go but at-the-read without needing to touch the dirty keys on my laptop.
 
 ** Current primary hardware target: RayNeo X2** (Android, sideload via ADB)  
 **Also planned:** Even Realities G2, XREAL One, anything except Meta ray-banned. 
@@ -27,9 +28,11 @@ Three minimal display primitives, nothing more:
 
 | Primitive | What it is |
 |---|---|
-| **Glyph** | Ambient dot — idle / thinking / running / awaiting / done / error |
-| **Whisper** | Single line, bottom of FOV — current task, 48 chars max, auto-fades |
-| **Card** | HITL approval surface — appears when Claude Code needs a decision |
+| **Glyph** | Ambient ascii symbols inspired by the elements — idle (earth) / thinking (water) / running (fire) / waiting (air) / done (earth, again) / error |
+| **Whisper** | Single line, bottom of the FOV — current task, <50 chars max, auto-fades |
+| ** Decision Card** | HITL approval surface — appears when Claude Code needs a decision |
+| ** Update Card** | Status update surface — appears when Claude Code completes a phase or a build |
+
 
 ## Hardware Setup (RayNeo X2)
 
@@ -80,22 +83,21 @@ claude-code-glasses/
 
 Come build this with us:
 
-- **r/claudeCodeGlasses** — community, demos, build logs
-- Android / RayNeo SDK dev needed for the renderer APK
-- Even Realities G2 renderer (v0.2)
+- **r/ClaudeElements** — community, demos, build logs, WIP
+- Even Realities G2 API/SDK support needed (v0.2)
 - Real-world Claude Code session testing for parser edge cases
 
 Open an issue or drop into the subreddit.
 
 ## Why
 
-Claude Code is the first AI agent that genuinely changes how I work. But it's screen-bound. The moment you look away — to think, to walk, to talk to someone — you lose the thread.
+Claude Code is the ghost in the machine with the most. But it's trapped in a screen like Zod at the end of Superman 2. 
+So this project is about enabling me to click approve, approve, approve when Im walking down Bush st to get a coffee at Blue Bottle. 
+If there is a kernal of a research question in this projects it is this: **what's the minimum viable UI surface needed to keep a human meaningfully in the loop with an AI agent?**
 
-This answers one question: **what's the minimum viable display surface to keep a human meaningfully in the loop with an AI agent?**
-
-A dot. A line of text. A card. That's it.
+Dare to dream. Ascii is the limit friends. 
 
 ---
 
-MIT License · Not affiliated with Anthropic or RayNeo  
-Built at the Amazon AGI SF Lab · Author: James Powderly
+MIT License · Not affiliated with Anthropic or RayNeo or Amazon AGI SF Lab (where I just happen to work). 
+Built in San Francisco duh · Author: James Powderly
