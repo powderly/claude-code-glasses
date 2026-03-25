@@ -11,8 +11,10 @@ out/
 
 # Android build
 apps/android/build/
+apps/android/app/build/
 apps/android/.gradle/
 apps/android/local.properties
+apps/android/app/libs/*.aar
 *.apk
 *.aab
 *.keystore
