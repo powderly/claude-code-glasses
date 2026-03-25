@@ -56,7 +56,7 @@ class CCGWebSocketClient : TransportClient {
         shouldReconnect = false
         webSocket?.close(1000, "client disconnect")
         webSocket = null
-        client?.dispatcher.executorService.shutdown()
+        client?.dispatcher?.executorService?.shutdown()
         client = null
         _connectionState.value = ConnectionState.Disconnected
     }
@@ -174,13 +174,15 @@ class CCGWebSocketClient : TransportClient {
     }
 
     private fun parseState(json: JSONObject): GlassStateData {
-        val glyph = json.optString("glyph", "idle")
-        val whisper = if (json.isNull("whisper")) null else json.optString("whisper")
+        // State messages wrap data in a "data" field: {"type":"state","data":{...}}
+        val data = json.optJSONObject("data") ?: json
+        val glyph = data.optString("glyph", "idle")
+        val whisper = if (data.isNull("whisper")) null else data.optString("whisper")
 
-        val card = if (json.isNull("card")) {
+        val card = if (data.isNull("card")) {
             null
         } else {
-            val cardJson = json.getJSONObject("card")
+            val cardJson = data.getJSONObject("card")
             CardData(
                 id = cardJson.optString("id", ""),
                 cardType = if (cardJson.optString("cardType") == "update") {
