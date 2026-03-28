@@ -3,7 +3,7 @@ aka claude-code-glasses
 
 > Pipe Claude Code's brain to your face. Open source.
 
-Claude is the first "piece of software" that has radically changed how I work and expanded my perspective in over a decade. Like Final cut, Arduino and Unity did before it, Claude Code has really empowered me to make all the things I can image and damatically shortened the time it takes me to go from brain to prod. But, sometimes when on my way to work on the BART or stretching it out before Pilates, or just waking up from twilight sedation after a colonoscopy, I cant stop thinking about our work together. I want anytime-anywhere access to Claude to be able to approve a build plan, brainstorm a design approach or just check in on the status of ongoing work. This software project is my attempt to connect stream-of-Claude to stream-of-Powderly consciousnesses using AR display glasses with the most minimal yet accessibe amount of i/o to enable me to monitor, approve and provide feedback on the actions of my fave agent when im on-the-go but at-the-read without needing to touch the dirty keys on my laptop.
+Claude is the first "piece of software" that has radically changed how I work and expanded my perspective in over a decade. Like Final Cut, Arduino and Unity did before it, Claude Code has really empowered me to make all the things I can imagine and dramatically shortened the time it takes me to go from brain to prod. But, sometimes when on my way to work on the BART or stretching it out before Pilates, or just waking up from twilight sedation after a colonoscopy, I can't stop thinking about our work together. I want anytime-anywhere access to Claude to be able to approve a build plan, brainstorm a design approach or just check in on the status of ongoing work. This software project is my attempt to connect stream-of-Claude to stream-of-Powderly consciousness using AR display glasses with the most minimal yet accessible amount of I/O to enable me to monitor, approve and provide feedback on the actions of my fave agent when I'm on-the-go but at-the-ready without needing to touch the dirty keys on my laptop.
 
 ** Current primary hardware target: RayNeo X2** (Android, sideload via ADB)  
 **Also planned:** Even Realities G2, XREAL One, anything except Meta ray-banned. 
@@ -87,6 +87,40 @@ Full setup guide: [docs/rayneo-x2-setup.md](docs/rayneo-x2-setup.md)
 | Voice: "approve" | Confirm card |
 | Voice: "skip" | Dismiss card |
 
+## Cloud Relay (Fly.io)
+
+The glasses need to talk to your laptop even when you're walking around on a different network. A tiny WebSocket relay bridges them — your laptop publishes agent state, your glasses subscribe. The relay is stateless, handles auth via session tokens, and costs nothing on Fly.io's free tier.
+
+**Why Fly.io?** The relay is ~100 lines of code pushing ~200 bytes per event. It needs WebSocket support, global edge deployment, and the ability to sleep when idle. Fly.io's free tier gives us 3 shared VMs with auto-stop/auto-start — the relay wakes on first connection and sleeps when you disconnect. Zero cost for casual use.
+
+### Deploy your own relay
+
+```bash
+# Install Fly CLI
+brew install flyctl
+fly auth login
+
+# Deploy (from apps/relay/)
+cd apps/relay
+fly launch --name your-relay-name --region sjc
+fly deploy
+```
+
+That's it. Your relay is live at `wss://your-relay-name.fly.dev`. The CLI will print a QR code encoding this URL + a session token when you run `ccg start --relay`.
+
+### How it works
+
+```
+Laptop (parser) ──websocket──> Relay (Fly.io) <──websocket── Glasses (renderer)
+                               stateless forwarder
+                               auth via session token
+```
+
+- Laptop connects as `publisher`, glasses connect as `renderer`
+- One publisher per token, multiple renderers allowed (pair programming, demos)
+- Relay stores last known state — late-joining glasses get caught up immediately
+- Auto-stops after idle, auto-starts on next connection
+
 ## Repo Structure
 
 ```
@@ -96,7 +130,9 @@ claude-code-glasses/
 │   ├── parser/            # Claude Code stdout → GlassState machine
 │   └── renderer-terminal/ # Terminal simulator for development
 ├── apps/
-│   └── cli/               # ccg CLI
+│   ├── cli/               # ccg CLI (start, simulate, status)
+│   ├── relay/             # WebSocket relay server (Fly.io)
+│   └── android/           # RayNeo X2 AR renderer (Kotlin)
 └── examples/
     └── basic/             # session.jsonl test fixture
 ```
