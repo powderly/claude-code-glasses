@@ -33,6 +33,10 @@ class HudActivity : BaseMirrorActivity<ActivityHudBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Base stereo alignment correction — the SDK's left layout sits
+        // ~102px too far left. Proven to converge in hardware testing.
+        mBindingPair.left.hudRoot.translationX = 102f
+
         val url = intent.getStringExtra("url") ?: run {
             Log.e(TAG, "No WebSocket URL provided")
             finish()

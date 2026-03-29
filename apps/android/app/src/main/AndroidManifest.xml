@@ -8,7 +8,8 @@
         android:name=".CCGApplication"
         android:label="CCG"
         android:theme="@style/Theme.CCG"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_security_config">
         <meta-data
             android:name="com.rayneo.mercury.app"
             android:value="true" />
@@ -18,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HudActivity" />
+        <activity android:name=".HudActivity" android:exported="true" />
+        <activity android:name=".TestActivity" android:exported="true" />
     </application>
 </manifest>

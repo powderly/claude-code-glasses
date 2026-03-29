@@ -1,36 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/hudRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#FF000000"
     android:paddingHorizontal="@dimen/rayneo_safety_padding_horizontal"
     android:paddingVertical="@dimen/rayneo_safety_padding_vertical">
 
-    <!-- Glyph: bottom-right -->
-    <com.ccg.glasses.ui.GlyphView
-        android:id="@+id/glyphView"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="4dp" />
+    <!-- Spacer: pushes content to bottom -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <!-- Whisper: bottom-left -->
-    <com.ccg.glasses.ui.WhisperView
-        android:id="@+id/whisperView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_marginBottom="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="52dp" />
-
-    <!-- Card: centered -->
+    <!-- Card: centered, match_parent width so it's symmetric -->
     <com.ccg.glasses.ui.CardView
         android:id="@+id/cardView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_marginBottom="12dp" />
 
-</FrameLayout>
+    <!-- Bottom bar: whisper + glyph in a horizontal row -->
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#22FFFFFF"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp">
+
+        <!-- Whisper: takes remaining space -->
+        <com.ccg.glasses.ui.WhisperView
+            android:id="@+id/whisperView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <!-- Glyph: fixed size, right side -->
+        <com.ccg.glasses.ui.GlyphView
+            android:id="@+id/glyphView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="12dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
