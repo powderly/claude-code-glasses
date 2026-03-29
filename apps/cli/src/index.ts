@@ -91,50 +91,48 @@ async function main() {
 
 async function startRelay(parser: ClaudeCodeParser): Promise<void> {
   const port = parseInt(getFlag('--relay-port', '9200'), 10)
-  const token = crypto.randomBytes(16).toString('hex')
+  const token = process.env.CCG_TOKEN ?? crypto.randomBytes(16).toString('hex')
 
   // Dynamic imports — only loaded when --relay is used
   const { createRelay } = await import('@ccg/relay')
-  const qrcode = await import('qrcode-terminal')
+  const qrcodeModule = await import('qrcode-terminal')
+  const qrcode = qrcodeModule.default ?? qrcodeModule
   const { WebSocket } = await import('ws')
 
-  const relay = createRelay({ port, token })
+  const { wss } = createRelay(port)
 
-  relay.on('listening', () => {
-    const url = `ws://localhost:${port}`
-    const connectUri = `ccg://connect?url=${encodeURIComponent(url)}&token=${token}`
+  const url = `ws://localhost:${port}`
+  const connectUri = `ccg://connect?url=${encodeURIComponent(url)}&token=${token}`
 
-    console.log(`\n  Relay listening on ${url}`)
-    console.log(`  Token: ${token}\n`)
-    qrcode.generate(connectUri, { small: true })
-    console.log(`\n  Scan the QR code with your glasses to connect.\n`)
+  console.log(`\nccg relay listening on ${url}`)
+  console.log(`token: ${token}\n`)
+  qrcode.generate(connectUri, { small: true })
+  console.log(`\nScan the QR code with your glasses to connect.\n`)
 
-    // Connect the parser as an internal publisher
-    const pub: WSType = new WebSocket(`ws://localhost:${port}`)
+  // Connect the parser as an internal publisher
+  const pub: WSType = new WebSocket(url)
 
-    pub.on('open', () => {
-      pub.send(JSON.stringify({ type: 'auth', token, role: 'publisher' }))
-    })
+  pub.on('open', () => {
+    pub.send(JSON.stringify({ type: 'auth', version: 1, token, role: 'publisher' }))
+  })
 
-    // Forward parser state to the relay
-    parser.on('state', (state) => {
-      if (pub.readyState === WebSocket.OPEN) {
-        pub.send(JSON.stringify({ type: 'state', payload: state }))
+  pub.on('message', (data) => {
+    try {
+      const msg = JSON.parse(data.toString()) as { type: string; action?: string }
+      if (msg.type === 'action') {
+        if (msg.action === 'approve') parser.approve()
+        else if (msg.action === 'dismiss') parser.dismiss()
       }
-    })
+    } catch {
+      // Ignore malformed messages (including auth_ok)
+    }
+  })
 
-    // Listen for actions from glasses via relay
-    pub.on('message', (data) => {
-      try {
-        const msg = JSON.parse(data.toString()) as { type: string; action?: string }
-        if (msg.type === 'action') {
-          if (msg.action === 'approve') parser.approve()
-          else if (msg.action === 'dismiss') parser.dismiss()
-        }
-      } catch {
-        // Ignore malformed messages
-      }
-    })
+  // Forward parser state to the relay
+  parser.on('state', (state) => {
+    if (pub.readyState === WebSocket.OPEN) {
+      pub.send(JSON.stringify({ type: 'state', data: state }))
+    }
   })
 }
 
