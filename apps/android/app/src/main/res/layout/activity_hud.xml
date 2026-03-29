@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="640dp"
-    android:layout_height="480dp"
-    android:background="@color/black"
-    android:padding="24dp">
+    android:id="@+id/hudRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF000000"
+    android:paddingHorizontal="@dimen/rayneo_safety_padding_horizontal"
+    android:paddingVertical="@dimen/rayneo_safety_padding_vertical">
 
-    <!-- Glyph: bottom-right corner, 48x48dp -->
+    <!-- Glyph: bottom-right -->
     <com.ccg.glasses.ui.GlyphView
         android:id="@+id/glyphView"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="bottom|end" />
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="4dp" />
 
-    <!-- Whisper: bottom-left, leaves 64dp margin for glyph -->
+    <!-- Whisper: bottom-left -->
     <com.ccg.glasses.ui.WhisperView
         android:id="@+id/whisperView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
-        android:layout_marginEnd="64dp" />
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="52dp" />
 
     <!-- Card: centered -->
     <com.ccg.glasses.ui.CardView
